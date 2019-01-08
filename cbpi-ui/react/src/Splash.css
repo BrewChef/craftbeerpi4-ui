@@ -1,0 +1,16 @@
+body {
+  padding-top: 70px;
+}
+
+.logo {
+  border: 1px solid red;
+}
+
+
+
+
+.logo::before {
+
+  content: "HALLO";
+
+}

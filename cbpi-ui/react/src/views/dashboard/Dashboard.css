@@ -1,0 +1,76 @@
+.grid {
+
+    background-size: 100px 100px, 100px 100px, 10px 10px, 10px 10px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+    background-image: -webkit-linear-gradient(white 2px, transparent 2px),
+    -webkit-linear-gradient(0, white 2px, transparent 2px),
+    -webkit-linear-gradient(rgba(255, 255, 255, .3) 1px, transparent 1px),
+    -webkit-linear-gradient(0, rgba(255, 255, 255, .3) 1px, transparent 1px);
+    background-image: -moz-linear-gradient(white 2px, transparent 2px),
+    -moz-linear-gradient(0, white 2px, transparent 2px),
+    -moz-linear-gradient(rgba(255, 255, 255, .3) 1px, transparent 1px),
+    -moz-linear-gradient(0, rgba(255, 255, 255, .3) 1px, transparent 1px);
+    background-image: linear-gradient(white 2px, transparent 2px),
+    linear-gradient(90deg, white 2px, transparent 2px),
+    linear-gradient(rgba(255, 255, 255, .3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .3) 1px, transparent 1px);
+    -pie-background: linear-gradient(white 2px, transparent 2px) -2px -2px / 100px,
+    linear-gradient(90deg, white 2px, transparent 2px) -2px -2px / 100px,
+    linear-gradient(rgba(255, 255, 255, .3) 1px, transparent 1px) -1px -1px / 10px,
+    linear-gradient(90deg, rgba(255, 255, 255, .3) 1px, transparent 1px) -1px -1px / 10px,
+    #269;
+    behavior: url(/pie/PIE.htc);
+}
+
+.card-bg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px dashed red;
+    background-size: 50px 50px;
+    background-color: #e3e3e3;
+    background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+    transparent 75%, transparent);
+    background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+    transparent 75%, transparent);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+    transparent 75%, transparent);
+    -pie-background: linear-gradient(135deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+    transparent 75%, transparent) 0 0 / 50px 50px, #ccc;
+    behavior: url(/pie/PIE.htc);
+}
+
+.card-body {
+    padding: 0.5rem;
+}
+
+.card-text {
+    margin-bottom: 0.2rem;
+}
+
+.card-title {
+    margin-bottom: 0.2rem;
+}
+
+.not_found_bg {
+    background-size: 50px 50px;
+    background-color: #c16;
+    background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+    transparent 75%, transparent);
+    background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+    transparent 75%, transparent);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+    transparent 75%, transparent);
+    -pie-background: linear-gradient(135deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+    transparent 75%, transparent) 0 0 / 50px 50px, #c16;
+    behavior: url(/pie/PIE.htc);
+}
