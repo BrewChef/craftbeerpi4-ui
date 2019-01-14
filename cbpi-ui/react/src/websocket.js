@@ -33,10 +33,24 @@ const messageTypes = [
 
 const init = (store) => {
 
+    Object.keys(messageTypes).forEach(type => console.log(type))
+
+
     ws.onmessage = e => {
       let data = JSON.parse(e.data)
       console.log('Receive!', data);
-        store.dispatch({type:data.topic, data:data.data});
+
+
+
+
+        if(data.topic.match("(actor)\\/([\\d])\\/(on|toggle|off)\\/(ok)$")) {
+            console.log("MATCH", data)
+            //store.dispatch({type:"ACTOR_UPDATE", payload:data.data});
+        }
+        else {
+            store.dispatch({type:data.topic, payload:data.data});
+        }
+
     }
 /*
   const ws = new Sockette('ws://localhost:8080/ws', {
@@ -59,7 +73,7 @@ const init = (store) => {
 
 
     // add listeners to socket messages so we can re-dispatch them as actions
-    //Object.keys(messageTypes).forEach(type => socket.on(type, (payload) => { store.dispatch({type, payload})}))
+    // Object.keys(messageTypes).forEach(type => socket.on(type, (payload) => { store.dispatch({type, payload})}))
 }
 
 const emit = (type, payload) => {}

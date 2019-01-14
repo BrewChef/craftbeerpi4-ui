@@ -12,7 +12,6 @@ const reducer_name = "actor"
 const render_action = (row_value, column_value, row_key, column_key, props) => {
 
 
-        row_value.state  = true
 
         let color = classNames( {
             'success': row_value.state === true,

@@ -11,9 +11,12 @@ export default class BasicTable extends Component {
         }
         else {
             if(column_key === 0) {
+
+
                 return <b onClick={()=>{this.props.edit(row_value.id)}}>{row_value[column_value.name]}</b>
             }
             else {
+
                 return row_value[column_value.name]
             }
         }
