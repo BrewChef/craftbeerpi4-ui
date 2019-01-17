@@ -51,7 +51,7 @@ class OptionModal extends Component {
 
     render() {
         let {title, id, data, cancel, options=[]} = this.props
-
+        console.log(data)
         let {set_power, toggle_time} = this.props.actions
         return (
             <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>

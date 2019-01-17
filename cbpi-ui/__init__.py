@@ -14,20 +14,51 @@ from voluptuous import Schema
 
 class UIWebSocket:
     def __init__(self, cbpi) -> None:
-        print("####### INIT ")
+
         self.cbpi = cbpi
         self._callbacks = defaultdict(set)
         self._clients = weakref.WeakSet()
         self.logger = logging.getLogger(__name__)
-        self.cbpi.app.add_routes([web.get('/ui-ws', self.websocket_handler)])
+        self.cbpi.app.add_routes([web.get('/ws1', self.websocket_handler)])
         self.cbpi.bus.register_object(self)
         self.actor_pattern = re.compile("(actor)\/([\d])\/(on|toggle|off)\/(ok)$")
+        self.sensor_pattern = re.compile("(sensor)\/([\d])\/(data)$")
+        self.kettle_pattern = re.compile("(kettle)\/([\d])\/(targettemp)\/(set)$")
+
 
     @on_event(topic="actor/+/+/ok")
-    async def listen2(self, topic, actor_id=1, **kwargs):
+    async def listen2(self, topic, **kwargs):
+
         result = self.actor_pattern.match(topic)
         actor_id = int(result.group(2))
         self.send(dict(topic="ACTOR_UPDATE", data=await self.cbpi.actor.get_one(actor_id)))
+
+
+    @on_event(topic="sensor/+/data")
+    async def listen3(self, topic, value, **kwargs):
+        result = self.sensor_pattern.match(topic)
+        sensor_id = int(result.group(2))
+        self.send(dict(topic="SENSOR_UPDATE", data=dict(id=sensor_id, value=value)))
+
+    @on_event(topic="kettle/+/targettemp/set")
+    async def listen4(self, topic, **kwargs):
+        result = self.kettle_pattern.match(topic)
+        kettle_id = int(result.group(2))
+        self.send(dict(topic="KETTLE_UPDATE", data=await self.cbpi.kettle.get_one(kettle_id)))
+
+    @on_event(topic="step/brewing/stopped")
+    async def listen5(self, topic, **kwargs):
+        self.send(dict(topic="STEP_UPDATE", data=await self.cbpi.step.get_all()))
+
+    @on_event(topic="step/+/started")
+    async def listen6(self, topic, **kwargs):
+        self.send(dict(topic="STEP_UPDATE", data=await self.cbpi.step.get_all()))
+
+    @on_event(topic="step/brewing/finished")
+    async def listen7(self, topic, **kwargs):
+        self.send(dict(topic="STEP_UPDATE", data=await self.cbpi.step.get_all()))
+
+
 
     async def listen(self, topic, **kwargs):
         data = dict(topic=topic, data=dict(**kwargs))
@@ -112,7 +143,6 @@ class CBPiUi(CBPiExtension):
 
 
 def setup(cbpi):
-    print("###### REGISTER")
 
     cbpi.plugin.register("UI", CBPiUi)
-    c = UIWebSocket(cbpi)
+    ws_client = UIWebSocket(cbpi)

@@ -6,7 +6,7 @@ import {rest_api} from "./rest_helper";
 import {arrayMove} from "react-sortable-hoc";
 
 const KEY = "BREWING"
-const base_path = "/brewing"
+const base_path = "/step"
 
 const initial_state = () => ({
         list: {},
@@ -18,8 +18,8 @@ export const save = (id, data) => rest_api(base_path+"/"+id , KEY+"_SAVE", "put"
 export const remove = (idx,id) => rest_api(base_path+"/"+id , KEY+"_REMOVE", "delete", {idx,id}, undefined, undefined, (dispatch)=>dispatch(goBack()));
 export const add = (data) => rest_api(base_path+"/" , KEY+"_ADD", "post", {}, {...data}, undefined, undefined, (dispatch,getState,request, response) => dispatch(replace("step/"+response.data.id)));
 export const remove_all = () => rest_api(base_path+"/" , KEY+"_REMOVE_ALL", "delete", {}, undefined, undefined, undefined);
-export const start = () => rest_api(base_path+"/next" , KEY+"START", "get", {});
-export const reset_all = () => rest_api(base_path+"/reset/all" , KEY+"RESET_ALL", "get", {});
+export const start = () => rest_api(base_path+"/start" , KEY+"START", "get", {});
+export const reset_all = () => rest_api(base_path+"/stop" , KEY+"RESET_ALL", "get", {});
 export const reset_current = () => rest_api(base_path+"/reset/current" , KEY+"RESET_CURRENT", "get", {});
 export const save_recipe = () => rest_api(base_path+"/save" , KEY+"SAVE", "post", {});
 export const get_recipes = () => rest_api(base_path+"/recipes" , KEY+"_GET_RECIPES", "get", {});
@@ -48,7 +48,9 @@ const brewing = (state = initial_state(), action) => {
         case "SORT_BREWING_STEPS":
             return {...state, list: _.each(state.list, (value,index) => {value.order = action.payload[value.id]; return value })}
         case "SYSTEM_LOAD_DATA_RECEIVED":
-            return {...state, list: action.payload.brewing, types: {...action.payload.step.types}}
+            console.log("########## WOOHOOO")
+            console.log(action.payload)
+            return {...state, list: action.payload.step.items, types: {...action.payload.step.types}}
         case "STEP_UPDATE":
             return {...state, list: action.payload}
         default:

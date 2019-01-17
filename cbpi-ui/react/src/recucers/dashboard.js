@@ -59,9 +59,11 @@ export const load_content = (id) => rest_api('/dashboard/' + id + '/content', "D
 
 export const move = (dashboard_id, id, x, y) => (dispatch, getState) => {
     dispatch({type: "DASHBOARD_CONTENT_MOVE", id, x, y})
-    axios.post('/dashboard/' + dashboard_id + '/move', {id, x, y}).then(response => {
+    axios.post('/dashboard/' + dashboard_id + '/content/' + id + '/move', {id, x, y}).then(response => {
     })
 }
+
+
 
 export const add = (id, data) => rest_api("/dashboard/" + id + "/content", "DASHBOARD_CONTENT_ADD", "post", {}, {...data});
 export const remove = (dashboard_id, content_id) => rest_api("/dashboard/" + dashboard_id + "/content/" + content_id, "DASHBOARD_CONTENT_REMOVE", "delete", {}, {dashboard_id, content_id});

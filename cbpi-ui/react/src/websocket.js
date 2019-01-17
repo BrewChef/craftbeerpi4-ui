@@ -2,7 +2,9 @@ import io from "socket.io-client";
 import Sockette from "sockette";
 
 
-const ws = new WebSocket('ws://' + document.domain + ':' + location.port + '/ws', []);
+
+
+const ws = new WebSocket('ws://' + document.domain + ':' + location.port + '/ws1', []);
 
 
 
@@ -38,11 +40,7 @@ const init = (store) => {
 
     ws.onmessage = e => {
       let data = JSON.parse(e.data)
-      console.log('Receive!', data);
-
-
-
-
+      console.log('#########Receive!', data);
         if(data.topic.match("(actor)\\/([\\d])\\/(on|toggle|off)\\/(ok)$")) {
             console.log("MATCH", data)
             //store.dispatch({type:"ACTOR_UPDATE", payload:data.data});
