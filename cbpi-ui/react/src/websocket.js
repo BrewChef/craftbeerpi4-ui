@@ -4,9 +4,43 @@ import Sockette from "sockette";
 
 
 
-const ws = new WebSocket('ws://' + document.domain + ':' + location.port + '/ws1', []);
 
 
+
+class CBPiWebSocket {
+  constructor() {
+      this.ws = undefined
+  }
+
+  connection_lost(e) {
+        this.store.dispatch({type:"WS_CONNECTION_LOST"});
+        setTimeout( () => {this.open()}, 1000)
+  }
+
+  open() {
+      this.ws = new WebSocket('ws://' + document.domain + ':' + location.port + '/ws1', []);
+
+      this.ws.onclose = this.connection_lost.bind(this)
+
+      this.ws.onmessage = this.on_message.bind(this)
+
+  }
+
+  on_message(e) {
+      let data = JSON.parse(e.data)
+      this.store.dispatch({type:data.topic, payload:data.data});
+  }
+
+  connect(store) {
+      this.store = store
+      this.open()
+  }
+
+
+}
+
+
+const cbpisocket = new CBPiWebSocket()
 
 
 //const socket = io.connect('http://' + document.domain + ':' + location.port + '/ws');
@@ -35,21 +69,12 @@ const messageTypes = [
 
 const init = (store) => {
 
-    Object.keys(messageTypes).forEach(type => console.log(type))
+    cbpisocket.connect(store)
 
 
-    ws.onmessage = e => {
-      let data = JSON.parse(e.data)
-      console.log('#########Receive!', data);
-        if(data.topic.match("(actor)\\/([\\d])\\/(on|toggle|off)\\/(ok)$")) {
-            console.log("MATCH", data)
-            //store.dispatch({type:"ACTOR_UPDATE", payload:data.data});
-        }
-        else {
-            store.dispatch({type:data.topic, payload:data.data});
-        }
 
-    }
+
+
 /*
   const ws = new Sockette('ws://localhost:8080/ws', {
   timeout: 5e3,

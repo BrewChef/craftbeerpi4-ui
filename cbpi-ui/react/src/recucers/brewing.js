@@ -28,7 +28,7 @@ export const load_recipe = (name) => rest_api(base_path+"/load/"+name , KEY+"_LO
 export const sort_steps = (data) => {
     return (dispatch, getState) => {
         dispatch({type: "SORT_"+KEY+"_STEPS", payload: data})
-        axios.post("/brewing/sort", data).then(()=> {}).catch(()=>{})
+        axios.post("/step/sort", data).then(()=> {}).catch(()=>{})
 
     }
 }
@@ -48,8 +48,7 @@ const brewing = (state = initial_state(), action) => {
         case "SORT_BREWING_STEPS":
             return {...state, list: _.each(state.list, (value,index) => {value.order = action.payload[value.id]; return value })}
         case "SYSTEM_LOAD_DATA_RECEIVED":
-            console.log("########## WOOHOOO")
-            console.log(action.payload)
+
             return {...state, list: action.payload.step.items, types: {...action.payload.step.types}}
         case "STEP_UPDATE":
             return {...state, list: action.payload}
