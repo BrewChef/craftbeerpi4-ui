@@ -24,7 +24,7 @@ class UIWebSocket:
         self.actor_pattern = re.compile("(actor)\/([\d])\/(on|toggle|off)\/(ok)$")
         self.sensor_pattern = re.compile("(sensor)\/([\d])\/(data)$")
         self.kettle_pattern = re.compile("(kettle)\/([\d])\/(targettemp)\/(set)$")
-
+        self.kettle_pattern_logic = re.compile("(kettle)\/([\d])\/(logic)\/(start|stop)$")
 
     @on_event(topic="actor/+/+/ok")
     async def listen2(self, topic, **kwargs):
@@ -58,12 +58,16 @@ class UIWebSocket:
     async def listen7(self, topic, **kwargs):
         self.send(dict(topic="STEP_UPDATE", data=await self.cbpi.step.get_all()))
 
+    @on_event(topic="notification/#")
+    async def listen8(self, topic, message, type, **kwargs):
+        self.send(dict(topic="NOTIFY", data=dict(id=1, title="HINT" , message=message, color=type, timeout=5000)))
 
-
-    async def listen(self, topic, **kwargs):
-        data = dict(topic=topic, data=dict(**kwargs))
-        self.logger.debug("PUSH %s " % data)
-        self.send(data)
+    @on_event(topic="kettle/+/logic/+")
+    async def listen9(self, topic, **kwargs):
+        print("UPDATE KETTLE")
+        result = self.kettle_pattern_logic.match(topic)
+        kettle_id = int(result.group(2))
+        self.send(dict(topic="KETTLE_UPDATE", data=await self.cbpi.kettle.get_one(kettle_id)))
 
 
     def send(self, data):

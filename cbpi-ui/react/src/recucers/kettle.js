@@ -32,7 +32,7 @@ export const save = (id, data) => rest_api(base_path+"/"+id , KEY+"_SAVE", "put"
 export const remove = (id) => rest_api(base_path+"/"+id , KEY+"_REMOVE", "delete", {id}, undefined, undefined, (dispatch)=>dispatch(goBack()));
 export const set_taget_temp = (id, temp) =>  rest_api(base_path+"/"+id+"/temp/"+temp , KEY+"_SET_TARGET_TEMP", "put", {});
 export const toggle_actor = (id) =>  (dispatch, getState) => { console.log(id)}
-export const toggle_logic = (id) =>  rest_api(base_path+"/"+id+"/automatic/" , KEY+"_TOGGLE_AUTOMATIC", "post", {});
+export const toggle_logic = (id) =>  rest_api(base_path+"/"+id+"/automatic" , KEY+"_TOGGLE_AUTOMATIC", "post", {});
 
 
 

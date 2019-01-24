@@ -1,16 +1,13 @@
 import React, {Component} from "react";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import {goBack, push} from "react-router-redux";
 import {set_taget_temp, toggle_actor, toggle_logic} from "../../../recucers/kettle";
 import {toggle} from "../../../recucers/actor";
-import classNames from "classnames";
 import {bindActionCreators} from "redux";
-import {OptionModal} from "../../../common";
-const reducer_name = "kettle"
-import sskettle from'./kettel_ss.png';
+import sskettle from './kettel_ss.png';
 
+const reducer_name = "kettle"
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -30,7 +27,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default class SSKettle extends Component {
 
 
-
     render = () => {
         let {goBack, toggle, set_taget_temp, toggle_logic} = this.props.actions
         let {data, sensor, actor, dummy, x, y, id} = this.props
@@ -41,14 +37,8 @@ export default class SSKettle extends Component {
         }
 
         return <div style={{position: 'absolute', top: y, left: x, width: 225, height: 200}}>
-
-        <img src={sskettle}/>
-
-
-
-
+            <img src={sskettle}/>
         </ div >
-
     }
 
 }

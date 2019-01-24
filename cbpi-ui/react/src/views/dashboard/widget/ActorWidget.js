@@ -65,7 +65,7 @@ class OptionModal extends Component {
                         Set Power
                     <div style={{display: 'flex', flex: 1, width: '100%', alignItems:'center', justifyContent:"space-between"}}>
                         <Button onClick={()=>{set_power(id,  parseInt(data.power)-1)}}><i className="fa fa-minus"/></Button>
-                        {data.power}%
+                        {data.power || ""}%
                         <Button onClick={()=>{set_power(id, parseInt(data.power)+1)}}><i className="fa fa-plus"/></Button>
                     </div>
                     </div>
@@ -203,7 +203,7 @@ export default class ActorWidget extends Component {
                         <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: "space-between"}}>
                             <div style={{fontSize: '1em'}}>
 
-                                    {data.timer ? (<Countdown end={data.timer}/>): (data.power + "%")}
+                                    {data.timer ? (<Countdown end={data.timer}/>) : (data.power ? (data.power + "%") : (""))}
                                 </div>
                         </div>
                     </div>

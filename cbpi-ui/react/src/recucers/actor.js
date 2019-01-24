@@ -31,8 +31,8 @@ export const load = () => rest_api(base_path+"/" , KEY+"_LOAD", "get");
 export const save = (id, data) => rest_api(base_path+"/"+id , KEY+"_SAVE", "put", {}, {...data});
 export const remove = (id) => rest_api(base_path+"/"+id , KEY+"_REMOVE", "delete", {id}, undefined, undefined, (dispatch)=>dispatch(goBack()));
 export const toggle = (id) => rest_api(base_path+"/"+id+"/toggle" , KEY+"_TOGGLE", "post");
-export const toggle_time = (id, time) => rest_api(base_path+"/"+id+"/toggle/"+time , KEY+"_TOGGLE", "post");
-export const call_action = (id, action) => rest_api(base_path+"/"+id+"/action/"+action , KEY+"_CALL_ACTION", "post");
+export const toggle_time = (id, time) => rest_api(base_path+"/"+id+"/toggle" , KEY+"_TOGGLE", "post",{},{time});
+export const call_action = (id, action) => rest_api(base_path+"/"+id+"/action" , KEY+"_CALL_ACTION", "post",{},{name:action, parameter:{}});
 export const set_power = (id, power) =>  rest_api(base_path+"/"+id+"/power/"+power , KEY+"_SET_POWER", "post", {});
 
 const actor = (state = initial_state(), action) => {

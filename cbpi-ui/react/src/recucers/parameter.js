@@ -1,7 +1,7 @@
 import {push} from "react-router-redux";
 import {rest_api} from './rest_helper'
 const KEY = "PARAMETER"
-const base_path = "/parameter"
+const base_path = "/config"
 const initial_state = () => {
 
     let result = {
@@ -12,7 +12,7 @@ const initial_state = () => {
 }
 
 
-export const save = (name, value) => rest_api(base_path+"/"+name , KEY+"_SAVE", "put", {name, value}, {value});
+export const save = (name, value) => rest_api(base_path+"/"+name+"/" , KEY+"_SAVE", "put", {name, value}, {value});
 
 
 export const get_parameter = (state, key, default_value) => state.parameter.list[key] ? state.parameter.list[key].value : default_value

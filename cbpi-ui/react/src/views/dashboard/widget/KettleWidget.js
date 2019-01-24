@@ -27,6 +27,7 @@ const ActorButton = ({type, data, actors, toggle, className="fa fa-fire"}) => {
 }
 
 const LogicButton = ({ data, toggle}) => {
+        console.log("LOGIC", data)
     if(data.logic) {
         let color = classNames( {
             'success': data.state === true,

@@ -2,7 +2,7 @@ import io from "socket.io-client";
 import Sockette from "sockette";
 
 
-
+import {add as show_alert} from "./recucers/alert";
 
 
 
@@ -14,7 +14,9 @@ class CBPiWebSocket {
 
   connection_lost(e) {
         this.store.dispatch({type:"WS_CONNECTION_LOST"});
-        setTimeout( () => {this.open()}, 1000)
+        console.log("##### ALERT LOST")
+        this.store.dispatch(show_alert("Connection lost", "Offline", "danger"))
+        setTimeout( () => {this.open()}, 5000)
   }
 
   open() {
