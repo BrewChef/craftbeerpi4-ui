@@ -1,39 +1,61 @@
-import axios from "axios";
-import {push, goBack, replace} from "react-router-redux";
+import {goBack, replace} from "react-router-redux";
 import _ from "lodash";
-import {add as show_alert} from './alert'
-import {rest_api} from './rest_helper'
 
-
+import {RESTApi} from './rest_helper'
 
 const KEY = "KETTLE"
 const base_path = "/kettle"
 
 const initial_state = () => {
-
     let result = {
-        list: {
-
-        },
-        types: {
-
-        },
-
-
+        list: {},
+        types: {},
     }
-
     return result
 }
 
+const api = new RESTApi(base_path, KEY)
 
-export const add = (data) => rest_api(base_path+"/" , KEY+"_ADD", "post", {}, {...data}, undefined, undefined, (dispatch,getState,request, response) => dispatch(replace("kettle/"+response.data.id)));
-export const load = () => rest_api(base_path+"/" , KEY+"_LOAD", "get");
-export const save = (id, data) => rest_api(base_path+"/"+id , KEY+"_SAVE", "put", {}, {...data}, undefined, (dispatch) => {console.log("WOOOOHOO"); dispatch(show_alert("KETTLE SAVED","","success",2000))});
-export const remove = (id) => rest_api(base_path+"/"+id , KEY+"_REMOVE", "delete", {id}, undefined, undefined, (dispatch)=>dispatch(goBack()));
-export const set_taget_temp = (id, temp) =>  rest_api(base_path+"/"+id+"/temp/"+temp , KEY+"_SET_TARGET_TEMP", "put", {});
+export const add = (data) => api.post({
+    url: "/",
+    action: "ADD",
+    data,
+    post_response: (dispatch,getState,request, response) => dispatch(replace("kettle/"+response.data.id))
+})
+
+export const load = () => api.get({
+    url: "/",
+    action: "LOAD"
+})
+
+export const save = (id, data) => api.put({
+    url: "/"+id,
+    action: "SAVE",
+    data,
+})
+
+export const remove = (id) => api.delete({
+    url: "/"+id,
+    action: "REMOVE",
+    context: {id},
+    pre_response: (dispatch)=>dispatch(goBack())
+})
+
+export const set_taget_temp = (id, temp) => api.put({
+    url: "/"+id+"/temp/"+temp,
+    success_msg: undefined,
+    action: "SET_TARGET_TEMP",
+
+})
+
+export const toggle_logic = (id) => api.post({
+    url: "/"+id+"/automatic",
+    success_msg: undefined,
+    action: "TOGGLE_AUTOMATIC"
+
+})
+
 export const toggle_actor = (id) =>  (dispatch, getState) => { console.log(id)}
-export const toggle_logic = (id) =>  rest_api(base_path+"/"+id+"/automatic" , KEY+"_TOGGLE_AUTOMATIC", "post", {});
-
 
 
 const kettle = (state = initial_state(), action) => {

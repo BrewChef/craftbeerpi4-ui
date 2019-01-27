@@ -1,7 +1,5 @@
-import axios from "axios";
-import {push, goBack, replace} from "react-router-redux";
+import {goBack, replace} from "react-router-redux";
 import _ from "lodash";
-import {add as add_alert} from './alert'
 import {rest_api} from './rest_helper'
 
 const KEY = "TANK"

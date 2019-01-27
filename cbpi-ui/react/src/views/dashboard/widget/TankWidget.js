@@ -1,14 +1,11 @@
-
 import React, {Component} from "react";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Card, CardBody, CardTitle} from "reactstrap";
 
 import {goBack, push} from "react-router-redux";
 
 import {bindActionCreators} from "redux";
-
-
 
 const reducer_name = "tank"
 

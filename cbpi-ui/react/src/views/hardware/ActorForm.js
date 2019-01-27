@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button} from "reactstrap";
 import BasicForm from "../../common/Form";
-import {push, goBack} from "react-router-redux";
-import {save, add, remove} from "../../recucers/actor";
+import {goBack, push} from "react-router-redux";
+import {add, remove, save} from "../../recucers/actor";
 import {bindActionCreators} from "redux";
 import ConfirmModal from '../../common/ConfirmModal';
 
@@ -12,8 +12,7 @@ const reducer_name = "actor"
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        translate: getTranslate(state.locale),
-        currentLanguage: getActiveLanguage(state.locale).code,
+
         data: ownProps.match.params.id ? state[reducer_name].list[ownProps.match.params.id] : {},
         config: {
             name: {label: "Name", type: "text"},

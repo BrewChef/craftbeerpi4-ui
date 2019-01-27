@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button} from "reactstrap";
 import BasicTable from "../../common/Table";
-import {goBack, push} from "react-router-redux";
+import {push} from "react-router-redux";
 import OptionModal from "../../common/OptionModal";
+
 const reducer_name = "kettle"
 
 class KettleOptions extends Component {

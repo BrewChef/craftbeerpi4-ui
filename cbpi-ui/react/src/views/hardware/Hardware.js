@@ -3,14 +3,10 @@ import {getActiveLanguage, getTranslate, Translate} from "react-localize-redux";
 
 import {connect} from "react-redux";
 import {Button, Card, CardHeader} from "reactstrap";
-
-import {CSSTransition} from "react-transition-group";
 import KettleTable from "./KettleTable";
 import ActorTable from "./ActorTable";
 import SensorTable from "./SensorTable";
-import TankTable from "./TankTable";
-import {goBack, push} from "react-router-redux";
-
+import {push} from "react-router-redux";
 
 @connect((state, ownProps) => {
     return {

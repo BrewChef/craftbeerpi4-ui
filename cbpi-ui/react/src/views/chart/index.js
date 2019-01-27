@@ -1,11 +1,10 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardHeader, CardTable, Table} from "reactstrap";
-import {goBack, push} from "react-router-redux";
+import {CardTable} from "reactstrap";
+import {goBack} from "react-router-redux";
 import {load} from "../../recucers/chart";
-import {getActiveLanguage, getTranslate, Translate} from "react-localize-redux";
+import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import Dygraph from 'dygraphs';
-import {Line} from "react-chartjs-2";
 
 const data = "2018-06-11 21:35:57,22\n"+
                 "2018-06-11 21:52:11,22\n"+

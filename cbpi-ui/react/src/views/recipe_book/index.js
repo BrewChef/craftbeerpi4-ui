@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Button, Card, Table} from "reactstrap";
-import {goBack, push} from "react-router-redux";
+import {Button, Table} from "reactstrap";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {get_recipes, load_recipe} from '../../recucers/brewing'
 

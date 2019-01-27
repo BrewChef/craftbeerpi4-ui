@@ -1,7 +1,6 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardBody, CardTitle, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Label} from "reactstrap";
+import {Card, CardBody, CardTitle, Input, InputGroup, InputGroupAddon, InputGroupText} from "reactstrap";
 import {goBack, push} from "react-router-redux";
 import {bindActionCreators} from "redux";
 

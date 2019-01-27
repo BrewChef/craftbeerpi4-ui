@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Button, Modal, ModalBody, ModalFooter, ModalHeader, Table, Card, CardBody} from "reactstrap";
-import {goBack, push} from "react-router-redux";
+import {Button, Card, CardBody, Modal, ModalBody, ModalFooter, ModalHeader, Table} from "reactstrap";
 import {download, load, remove} from "../../recucers/plugins";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import _ from "lodash";

@@ -1,4 +1,5 @@
 import {push} from "react-router-redux";
+
 const initial_state = () => {
 
     let result = {

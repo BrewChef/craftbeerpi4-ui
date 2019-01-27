@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate, Translate} from "react-localize-redux";
+import {Translate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, InputGroup, InputGroupAddon, InputGroupText, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import {add} from "../../recucers/dashboard";
-import {goBack, push} from "react-router-redux";
 import {save} from "../../recucers/parameter";
+
 @connect((state, ownProps) => {
     return {
 
@@ -15,7 +15,7 @@ import {save} from "../../recucers/parameter";
             dispatch(add(id, data))
         },
         save: (name, value) => {
-            dispatch(save(name, value))
+            dispatch(save(name, value, "BREW_NAME_SAVED"))
         }
     }
 }, null, {withRef: true})

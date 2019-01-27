@@ -50,8 +50,17 @@ class UIWebSocket:
     async def listen5(self, topic, **kwargs):
         self.send(dict(topic="STEP_UPDATE", data=await self.cbpi.step.get_all()))
 
+    @on_event(topic="step/brewing/finished")
+    async def listen51(self, topic, **kwargs):
+
+        self.send(dict(topic="NOTIFY", data=dict(id=1, title="BREWING_FINISHED", color="success", timeout=5000)))
+
     @on_event(topic="step/+/started")
     async def listen6(self, topic, **kwargs):
+        self.send(dict(topic="STEP_UPDATE", data=await self.cbpi.step.get_all()))
+
+    @on_event(topic="step/update")
+    async def listen61(self, topic, **kwargs):
         self.send(dict(topic="STEP_UPDATE", data=await self.cbpi.step.get_all()))
 
     @on_event(topic="step/brewing/finished")

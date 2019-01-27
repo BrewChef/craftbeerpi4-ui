@@ -1,11 +1,4 @@
-import io from "socket.io-client";
-import Sockette from "sockette";
-
-
 import {add as show_alert} from "./recucers/alert";
-
-
-
 
 class CBPiWebSocket {
   constructor() {

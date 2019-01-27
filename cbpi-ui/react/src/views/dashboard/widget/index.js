@@ -1,3 +1,5 @@
+import StepListModal from "./StepListModal";
+
 export { default as ActorWidget } from "./ActorWidget";
 export { default as BrewNameWidget } from "./BrewNameWidget";
 export { default as KettleWidget } from "./KettleWidget";
@@ -31,6 +33,7 @@ import MixCalc from './MixCalc'
 import BBQKettle from './BBQKettle'
 import BBQKetteAddModal from './BBQKetteAddModal'
 import SSKettle from './SSKettle'
+import SSKetteAddModal from './SSKetteAddModal'
 
 export const config = {
             kettle: {
@@ -65,7 +68,8 @@ export const config = {
             },
             step_list: {
                 name: "Step List",
-                component: StepList
+                component: StepList,
+                dialog: StepListModal
             },
             step_control: {
                 name: "Step Controls",
@@ -94,6 +98,7 @@ export const config = {
 
             sskettle: {
                 name:"SS Kettle",
-                component: SSKettle
+                component: SSKettle,
+                dialog: SSKetteAddModal
             }
         }

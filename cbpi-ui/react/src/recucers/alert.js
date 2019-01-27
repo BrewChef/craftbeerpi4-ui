@@ -1,12 +1,8 @@
-import axios from "axios";
-import {push, goBack, replace} from "react-router-redux";
-import _ from "lodash";
 import {rest_api} from "./rest_helper";
 
 const KEY = "ALERT"
 
 const initial_state = () => ({list: {}})
-
 
 
 export const add = (title, text, color = "success", timeout = undefined) => {
@@ -17,6 +13,23 @@ export const add = (title, text, color = "success", timeout = undefined) => {
     }
 }
 
+export const alert = (options) => {
+
+    options = {
+        text: "",
+        title: "",
+        color: "success",
+        timeout: undefined,
+        visible: true,
+        id: new Date().getTime(),
+        ...options
+    }
+    return (dispatch, getState) => {
+
+        dispatch({type: "ADD_"+KEY, payload: options})
+
+    }
+}
 
 export const dismiss = (id) => {
     return (dispatch, getState) => {
@@ -26,16 +39,11 @@ export const dismiss = (id) => {
 }
 
 export const post_callback = (id, key) => rest_api("/system/alert/"+id+"/"+key , KEY+"_ACTION_CALL_BACK", "post", {});
-
 export const response = (id, key) => {
 
     return (dispatch, getState) => {
-
-
         dispatch(post_callback(id,key))
         dispatch(dismiss(id))
-
-
     }
 }
 

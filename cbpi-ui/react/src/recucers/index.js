@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
-import { routerReducer} from "react-router-redux";
-import { localeReducer as locale } from 'react-localize-redux';
+import {routerReducer} from "react-router-redux";
+import {localeReducer as locale} from 'react-localize-redux';
 import session from './session'
 import alert from './alert'
 import dashboard from './dashboard'
@@ -14,6 +14,7 @@ import plugins from './plugins'
 import brewing from './brewing'
 import logs from './logs'
 import chart from './chart'
+
 const app = combineReducers({
     screen,
     alert,

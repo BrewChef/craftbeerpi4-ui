@@ -1,14 +1,14 @@
 import React, {Component} from "react";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, Card, CardBody, CardTitle, CardHeader, CardFooter} from "reactstrap";
-import DSForm from "../../common/Form";
-import {push, goBack} from "react-router-redux";
-import {save, add, remove} from "../../recucers/sensor";
-import {bindActionCreators} from "redux";
+import {Button, Card, CardBody, CardFooter, CardHeader} from "reactstrap";
 import BasicForm from "../../common/Form";
-const reducer_name = "sensor"
+import {goBack, push} from "react-router-redux";
+import {add, remove, save} from "../../recucers/sensor";
+import {bindActionCreators} from "redux";
 import ConfirmModal from '../../common/ConfirmModal';
+
+const reducer_name = "sensor"
 
 const mapStateToProps = (state, ownProps) => {
     return {

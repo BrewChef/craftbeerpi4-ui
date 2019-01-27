@@ -1,31 +1,20 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate, Translate} from "react-localize-redux";
+import {Translate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavItem, NavLink, TabContent, TabPane} from "reactstrap";
-import {goBack, push} from "react-router-redux";
-import {add, remove_dashboard, toggle_edit} from "../../recucers/dashboard";
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader, Nav, NavItem, NavLink, TabContent, TabPane} from "reactstrap";
+import {add} from "../../recucers/dashboard";
 import classNames from "classnames";
 import {config} from "./widget";
+import {bindActionCreators} from "redux";
 
 @connect((state, ownProps) => {
     return {
         edit: state.dashboard.edit,
         dashboard: state.dashboard.dashboards[ownProps.dasboard_id],
-
     }
 }, (dispatch, ownProps) => {
     return {
-
-        add: (id, data) => {
-            dispatch(add(id, data))
-        },
-        toggle: () => {
-            dispatch(toggle_edit())
-        },
-        remove_dashboard: (id) => {
-            dispatch(remove_dashboard(id))
-        }
-
+        actions: bindActionCreators({add}, dispatch),
     }
 }, null, {withRef: true})
 export default class WidgetSelectorModal extends Component {
@@ -48,7 +37,7 @@ export default class WidgetSelectorModal extends Component {
     }
 
     save() {
-        this.props.add(this.props.dbid, {type: "text", config: {text: this.state.text, size: parseInt(this.state.size)}})
+        this.props.action.add(this.props.dbid, {type: "text", config: {text: this.state.text, size: parseInt(this.state.size)}})
         this.setState({text: "", size: 15})
         this.toggle()
     }
@@ -58,7 +47,7 @@ export default class WidgetSelectorModal extends Component {
         let {dbid} = this.props
         return (
             <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
-                <ModalHeader toggle={this.toggle.bind(this)}>WIDGET SELECT</ModalHeader>
+                <ModalHeader toggle={this.toggle.bind(this)}><Translate id="SELECT_WIDGET"/></ModalHeader>
                 <ModalBody>
 
                     <div style={{display: 'flex'}}>
@@ -74,29 +63,11 @@ export default class WidgetSelectorModal extends Component {
                                     this.toggle_tab('1');
                                 }}
                             >
-                                Brewing
+                                <Translate id="WIDGET_BREWING"/>
                             </NavLink>
                         </NavItem>
-                        <NavItem>
-                            <NavLink
-                                className={classNames({active: this.state.activeTab === '2'})}
-                                onClick={() => {
-                                    this.toggle_tab('2');
-                                }}
-                            >
-                                Fermentation
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink
-                                className={classNames({active: this.state.activeTab === '2'})}
-                                onClick={() => {
-                                    this.toggle_tab('2');
-                                }}
-                            >
-                                Other
-                            </NavLink>
-                        </NavItem>
+
+
                     </Nav>
                     <TabContent activeTab={this.state.activeTab}>
                         <TabPane tabId="1">
@@ -115,7 +86,7 @@ export default class WidgetSelectorModal extends Component {
                                         }
                                         else {
                                             return (<div key={key} className="w-25"><Button block onClick={() => {
-                                                this.props.add(dbid, {type: key, config: {}})
+                                                this.props.actions.add(dbid, {type: key, config: {}})
                                             }}>{value.name}</Button></div>)
                                         }
 
@@ -124,7 +95,7 @@ export default class WidgetSelectorModal extends Component {
                             </div>
                         </TabPane>
                         <TabPane tabId="2">
-                            HALL
+
                         </TabPane>
                     </TabContent>
 

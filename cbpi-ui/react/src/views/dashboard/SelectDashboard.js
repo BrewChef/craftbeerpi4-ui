@@ -1,13 +1,9 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate} from "react-localize-redux";
 
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button} from "reactstrap";
 
 import "./Dashboard.css";
-
-import {add, load_content, move, remove} from "../../recucers/dashboard";
-
 
 @connect((state, ownProps) => {
     return {

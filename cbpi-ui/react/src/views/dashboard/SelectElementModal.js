@@ -1,13 +1,10 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate} from "react-localize-redux";
+import {getTranslate} from "react-localize-redux";
 
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
-
-
+import {Button, Modal, ModalBody, ModalHeader} from "reactstrap";
 
 import {add} from "../../recucers/dashboard";
-import {goBack, push} from "react-router-redux";
 
 const Text = ({value}) => <div style={{position: 'absolute', top: value.y, left: value.x}}>HALLO</div>
 

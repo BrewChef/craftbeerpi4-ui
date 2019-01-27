@@ -1,10 +1,9 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate, Translate} from "react-localize-redux";
+import {Translate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, InputGroup, InputGroupAddon, InputGroupText, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import "./Dashboard.css";
 import {add} from "../../recucers/dashboard";
-import {goBack, push} from "react-router-redux";
 
 @connect((state, ownProps) => {
     return {}

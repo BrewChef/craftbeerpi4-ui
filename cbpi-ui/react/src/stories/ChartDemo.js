@@ -1,9 +1,5 @@
 import React, {Component} from "react";
-import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardHeader, CardTable, Table} from "reactstrap";
-import {goBack, push} from "react-router-redux";
-
-import {getActiveLanguage, getTranslate, Translate} from "react-localize-redux";
+import {CardTable} from "reactstrap";
 import moment from "moment";
 import {Line} from "react-chartjs-2";
 

@@ -1,14 +1,13 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, CardHeader, Card} from "reactstrap";
-import {goBack, push} from "react-router-redux";
+import {Button, ButtonGroup, Card, CardHeader} from "reactstrap";
+import {push} from "react-router-redux";
 import {getActiveLanguage, getTranslate, Translate} from "react-localize-redux";
 import StepTable from "./StepTable";
-import {OptionModal,ConfirmModal} from "../../common";
+import {ConfirmModal, OptionModal} from "../../common";
 import BrewNameModal from "./BrewNameModal";
 import {get_parameter} from '../../recucers/parameter'
-import {remove_all,save_recipe} from '../../recucers/brewing'
-
+import {remove_all, save_recipe, start, reset_all} from '../../recucers/brewing'
 
 
 @connect((state, ownProps) => {
@@ -33,7 +32,14 @@ import {remove_all,save_recipe} from '../../recucers/brewing'
         },
         save_recipe: () => {
             dispatch(save_recipe())
+        },
+        start: () => {
+            dispatch(start())
+        },
+        reset_all: () => {
+            dispatch(reset_all())
         }
+
     }
 }, null, {withRef: true})
 export default class BrewingSteps extends Component {
@@ -55,6 +61,8 @@ export default class BrewingSteps extends Component {
                             <Button onClick={()=>{this.refs.brew_name_modal.wrappedInstance.show(this.props.name)}}>{this.props.name} <i className="fa fa-edit"/> </Button>
                             <BrewNameModal ref="brew_name_modal"/>
                             <ButtonGroup className="float-right" >
+                                <Button disabled={this.props.is_brewing} color="success" onClick={()=>{this.props.start()}}><Translate id="START_BREWNING"/></Button>
+                                <Button disabled={!this.props.is_brewing} color="danger" onClick={()=>{this.props.reset_all()}}><Translate id="STOP_BREWNING"/></Button>
                                 <Button disabled={this.props.is_brewing} color="success" onClick={()=>{this.props.save_recipe()}}><Translate id="SAVE_RECIPIE"/></Button>
                                 <Button disabled={this.props.is_brewing} color="danger" onClick={()=> {this.refs.clear_confirm_modal.wrappedInstance.toggle()}}><Translate id="CLEAR_STEPS"/></Button>
                                 <Button disabled={this.props.is_brewing} color="warning" onClick={() => { this.refs.recipe_modal.wrappedInstance.toggle()}}><Translate id="RECIPIE_BOOK"/></Button>

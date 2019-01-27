@@ -1,10 +1,10 @@
-import React, {Component} from "react";
-import {getActiveLanguage, getTranslate} from "react-localize-redux";
+import React from "react";
 import {connect} from "react-redux";
-import {Button, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import BasicTable from "../../common/Table";
-import {goBack, push} from "react-router-redux";
-import {load} from "../../recucers/kettle";
+import {push} from "react-router-redux";
+import {Translate} from "react-localize-redux";
+import {Button} from "reactstrap";
+
 const reducer_name = "parameter"
 
 const render_value = (row_value, column_value, row_key, column_key, props) => {
@@ -12,8 +12,23 @@ const render_value = (row_value, column_value, row_key, column_key, props) => {
         switch(row_value.type) {
             case "select":
                 let o = row_value.options.find((item)=> item.value == row_value.value )
-
                 return o.label
+            case "kettle":
+                if (row_value.value && row_value.value in props.kettles) {
+                   return  props.kettles[row_value.value].name
+                }
+                return <Translate id="PARAMETER_NOT_SET"/>
+            case "actor":
+                if (row_value.value && row_value.value in props.actors) {
+                   return  props.actors[row_value.value].name
+                }
+                return <Translate id="PARAMETER_NOT_SET"/>
+            case "sensor":
+                if (row_value.value && row_value.value in props.sensors) {
+                   return  props.sensors[row_value.value].name
+                }
+                return <Translate id="PARAMETER_NOT_SET"/>
+
             default:
                 return row_value.value
         }
@@ -25,7 +40,8 @@ const render_value = (row_value, column_value, row_key, column_key, props) => {
 }
 
 const render_link = (row_value, column_value, row_key, column_key, props) => {
-    return <b onClick={()=>{props.edit(row_value.name)}}>{row_value.name}</b>
+    return <div><Button  size="sm"  onClick={()=>{props.edit(row_value.name)}}><i className="fa fa-edit"/></Button> {row_value.name}</div>
+
 }
 
 
@@ -39,6 +55,8 @@ const mapStateToProps = (state, ownProps) => {
 
         ],
         items: state[reducer_name].list,
+        kettles: state.kettle.list,
+        sensors: state.sensor.list,
         actors: state.actor.list
     }
 }

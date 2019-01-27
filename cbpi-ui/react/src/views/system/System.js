@@ -1,11 +1,8 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Button, Card, CardBody, CardHeader, Table} from "reactstrap";
-import {goBack, push} from "react-router-redux";
+import {Card, CardBody, CardHeader} from "reactstrap";
 import {load} from "../../recucers/plugins";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
-
-import {Line} from "react-chartjs-2";
 
 const getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));

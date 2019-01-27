@@ -1,25 +1,18 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, FormGroup, Input, Label, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import {add, add_dashboard} from "../../recucers/dashboard";
-import {goBack, push} from "react-router-redux";
 
-@connect((state, ownProps) => {
-    return {
-
-
-    }
-}, (dispatch, ownProps) => {
-    return {
+@connect((state, ownProps) => ({}), (dispatch, ownProps) => (
+    {
         add: (id, data) => {
             dispatch(add(id, data))
         },
         add_dashboard(name) {
             dispatch(add_dashboard(name))
         }
-    }
-}, null, {withRef: true})
+    }),
+    null, {withRef: true})
 export default class NewDashboardModal extends Component {
 
     state = {modal: false, text:""}
@@ -46,7 +39,7 @@ export default class NewDashboardModal extends Component {
                 <ModalHeader toggle={this.toggle.bind(this)}>New Dashboard</ModalHeader>
                 <ModalBody>
                     <FormGroup >
-                        <Label for="exampleEmail">Text</Label>
+                        <Label for="exampleEmail">Name</Label>
                         <Input value={this.state.text}  onChange={this.onChange.bind(this)} type="text" name={name} id="exampleEmail"/>
                     </FormGroup>
                 </ModalBody>

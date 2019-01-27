@@ -1,10 +1,9 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardHeader, CardTable, Table} from "reactstrap";
-import {goBack, push} from "react-router-redux";
+import {Button, Card, CardTable} from "reactstrap";
+import {goBack} from "react-router-redux";
 import {load} from "../../recucers/chart";
-import {getActiveLanguage, getTranslate, Translate} from "react-localize-redux";
-import Dygraph from 'dygraphs';
+import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {Line} from "react-chartjs-2";
 
 @connect((state, ownProps) => {

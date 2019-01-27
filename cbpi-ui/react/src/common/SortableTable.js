@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {Table} from "reactstrap";
-import { SortableContainer, SortableElement, SortableHandle, arrayMove} from "react-sortable-hoc";
-import {Button} from "reactstrap";
+import {arrayMove, SortableContainer, SortableElement, SortableHandle} from "react-sortable-hoc";
 import {Translate} from "react-localize-redux";
+
 const DragHandle = SortableHandle(() => <span><i className="fa fa-bars"/></span>);
 
 const render_column = (row_value, column_value, row_key, column_key, props) => {

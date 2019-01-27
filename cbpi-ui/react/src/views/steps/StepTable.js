@@ -1,14 +1,11 @@
-import React, {Component} from "react";
-import {getActiveLanguage, getTranslate} from "react-localize-redux";
+import React from "react";
 import {connect} from "react-redux";
-import {Button, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import SortableTable from "../../common/SortableTable";
-import {goBack, push} from "react-router-redux";
-import {OptionModal} from "../../common";
-const reducer_name = "brewing"
+import {push} from "react-router-redux";
 import {sort_steps} from '../../recucers/brewing'
 import Countdown from "../../common/Countdown";
 
+const reducer_name = "brewing"
 
 const render_state = (row_value, column_value, row_key, column_key, props) => {
     switch (row_value.state) {

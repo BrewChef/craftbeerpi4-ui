@@ -1,14 +1,14 @@
-
 import React, {Component} from "react";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button, Card, CardBody, CardText, CardTitle} from "reactstrap";
 import {goBack, push} from "react-router-redux";
-import {set_taget_temp, toggle_actor, toggle_logic} from '../../../recucers/kettle'
+import {set_taget_temp, toggle_logic} from '../../../recucers/kettle'
 import {toggle} from '../../../recucers/actor'
 import classNames from "classnames";
 import {bindActionCreators} from "redux";
 import {OptionModal} from "../../../common";
+
 const reducer_name = "kettle"
 
 
@@ -27,7 +27,7 @@ const ActorButton = ({type, data, actors, toggle, className="fa fa-fire"}) => {
 }
 
 const LogicButton = ({ data, toggle}) => {
-        console.log("LOGIC", data)
+
     if(data.logic) {
         let color = classNames( {
             'success': data.state === true,
@@ -55,7 +55,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        actions: bindActionCreators({push, goBack, toggle, set_taget_temp, toggle_actor, toggle_logic}, dispatch),
+        actions: bindActionCreators({push, goBack, toggle, set_taget_temp, toggle_logic}, dispatch),
     }
 }
 

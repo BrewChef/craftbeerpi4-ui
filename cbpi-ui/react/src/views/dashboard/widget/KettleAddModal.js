@@ -1,11 +1,9 @@
 import React, {Component} from "react";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
-import {goBack, push} from "react-router-redux";
+import {Button, Modal, ModalBody, ModalHeader} from "reactstrap";
 import {bindActionCreators} from "redux";
 import {add} from "../../../recucers/dashboard";
-
 
 const mapStateToProps = (state, ownProps) => {
     return {

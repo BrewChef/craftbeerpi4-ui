@@ -43,6 +43,9 @@ export default class Countdown extends Component {
 
     format() {
 
+        if (!this.props.end) {
+            return ""
+        }
         let totalSeconds = this.state.seconds
 
         if (this.props.format) {

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, ListGroup, ListGroupItem} from "reactstrap";
 import {goBack, push} from "react-router-redux";
 import {get_parameter} from '../../../recucers/parameter'
 import {bindActionCreators} from "redux";

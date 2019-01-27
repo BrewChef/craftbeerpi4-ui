@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button} from "reactstrap";
 import {goBack, push} from "react-router-redux";
 import {set_taget_temp, toggle_actor, toggle_logic} from "../../../recucers/kettle";
 import {toggle} from "../../../recucers/actor";
 import classNames from "classnames";
 import {bindActionCreators} from "redux";
-import {OptionModal} from "../../../common";
+
 const reducer_name = "kettle"
 
 const ActorButton = ({type, data, actors, toggle, className = "fa fa-fire"}) => {
@@ -59,17 +59,13 @@ export default class BBQKettle extends Component {
         }
 
         if (dummy) {
-            return <div className="card-bg text-dark" style={{width: 225, height: 200}}>{data.name}</div>
+            return <div className="card-bg text-dark" style={{width: 225, height: 200}}>
+                <div>BBQ </div>
+                <div>{data.name}</div>
+            </div>
         }
 
         return <div style={{position: 'absolute', top: y, left: x, width: 225, height: 200}}>
-
-
-
-
-
-
-
 
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg"  x="0" y="0" width="200" height="200" viewBox="0, 0, 200, 200">
   <g id="Ebene_1">

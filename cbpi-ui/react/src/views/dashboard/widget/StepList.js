@@ -1,21 +1,17 @@
 import React, {Component} from "react";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, ListGroup, ListGroupItem} from "reactstrap";
+import {Button, Card, CardHeader, ListGroup, ListGroupItem} from "reactstrap";
 import {goBack, push} from "react-router-redux";
 import {bindActionCreators} from "redux";
 import OptionModal from "../../../common/OptionModal";
 import Countdown from "../../../common/Countdown";
 
-@connect((state, ownProps) => {
-    return {
-        type: ownProps.data.type ? state.brewing.types[ownProps.data.type] : undefined
-    }
-}, (dispatch, ownProps) => {
-    return {
-        actions: bindActionCreators({push, goBack}, dispatch)
-    }
-}, null, {withRef: true})
+@connect((state, ownProps) => ({
+    type: ownProps.data.type ? state.brewing.types[ownProps.data.type] : undefined
+}), (dispatch, ownProps) => ({
+    actions: bindActionCreators({push, goBack}, dispatch)
+}), null, {withRef: true})
 class StepListItem extends Component {
 
     renderButton() {
@@ -26,7 +22,7 @@ class StepListItem extends Component {
             let options = _.map(type.actions, (value, id) => ({
                 label: value.label, action: () => {
                 }
-            }))
+            }));
 
             return ([
                 <Button size="sm" onClick={(e) => {
@@ -43,9 +39,7 @@ class StepListItem extends Component {
 
     renderTimer() {
         let {data, type} = this.props;
-
-
-
+        console.log("########PRINT TIMER", data)
         if(data.state === 'A' && data.stepstate.timer_end) {
             return  <Countdown end={data.stepstate.timer_end*1000}/>
         }
@@ -54,11 +48,10 @@ class StepListItem extends Component {
             return (<div><div><small>Timer</small></div>{data.config.timer}°</div>)
         }
 
-
     }
 
     render_temp() {
-        let {data, type} = this.props
+        let {data, type} = this.props;
         if (data.config.temp) {
             return (<div><div><small>Temp</small></div>{data.config.temp}°</div>)
         }
@@ -69,25 +62,25 @@ class StepListItem extends Component {
     }
 
     render() {
-        let {data, type} = this.props
-        let color = ""
+        let {data, type} = this.props;
+        let color = "";
         switch (data.state) {
 
             case "D":
-                color = "info"
+                color = "info";
                 break;
             case "A":
-                color = "success"
+                color = "success";
                 break;
             default:
-                color = ""
+                color = "";
                 break;
         }
 
         return (<ListGroupItem color={color} >
             <div className="d-flex w-100 justify-content-between align-items-center">
 
-                <span className="mb-1">{data.name}</span>
+                <span className="mb-1"><Button size="sm"><i className="fa fa-info-circle"/> </Button>{data.name}</span>
                 {this.render_temp()}
                 {this.renderTimer()}
                 <small>{this.renderButton()}</small>
@@ -99,8 +92,7 @@ class StepListItem extends Component {
 
 @connect((state, ownProps) => {
     return {
-        translate: getTranslate(state.locale),
-        currentLanguage: getActiveLanguage(state.locale).code,
+
         steps: _.sortBy(state.brewing.list, ["order"]),
         size: _.size(state.brewing.list),
         types: state.brewing.types
@@ -113,14 +105,20 @@ class StepListItem extends Component {
 export default class StepList extends Component {
 
     render = () => {
-
-        let {goBack, save, add, remove} = this.props.actions
-        const width = 300
+        let {config} = this.props.value;
+        let {goBack, save, add, remove} = this.props.actions;
+        let width = 300;
+        if (config.type && config.type == "small"){
+            width = 300;
+        }
+        else {
+            width = 500;
+        }
         if (this.props.dummy) {
             return <div className="card-bg text-dark" style={{width, height: 200}}>STEP LIST</div>
         }
 
-        let {x, y, size} = this.props
+        let {x, y, size} = this.props;
 
         if (size <= 0) {
             return <div style={{position: 'absolute', top: y, left: x, width}}>

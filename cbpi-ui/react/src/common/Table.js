@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Button, Table} from "reactstrap";
+import {Table, Button} from "reactstrap";
 import {Translate} from "react-localize-redux";
 
 export default class BasicTable extends Component {
@@ -13,7 +13,7 @@ export default class BasicTable extends Component {
             if(column_key === 0) {
 
 
-                return <b onClick={()=>{this.props.edit(row_value.id)}}>{row_value[column_value.name]}</b>
+                return <div><Button  size="sm"  onClick={()=>{this.props.edit(row_value.id)}}><i className="fa fa-edit"/></Button> {row_value[column_value.name]}</div>
             }
             else {
 

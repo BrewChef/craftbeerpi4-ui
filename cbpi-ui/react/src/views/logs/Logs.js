@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Button, Table, ButtonGroup, Card, CardHeader, CardTable} from "reactstrap";
-import {goBack, push} from "react-router-redux";
-import {load, clear_all,clear_log} from "../../recucers/logs";
+import {Button, ButtonGroup, Card, CardHeader, CardTable, Table} from "reactstrap";
+import {clear_all, clear_log, load} from "../../recucers/logs";
 import {getActiveLanguage, getTranslate, Translate} from "react-localize-redux";
 import _ from "lodash";
 
@@ -30,10 +29,8 @@ import _ from "lodash";
 export default class System extends Component {
 
     componentDidMount() {
-
         this.props.load()
     }
-
     render() {
         return (
 
@@ -44,7 +41,6 @@ export default class System extends Component {
                         <Button onClick={()=>{this.props.clear_all()}} color="success"><Translate id="DELETE_ALL_LOGS"/></Button>
                     </ButtonGroup>
                 </CardHeader>
-
                 <Table>
                     <tbody>
                     {_.map(this.props.data, (value, index) => <tr>
@@ -55,9 +51,6 @@ export default class System extends Component {
                     </tbody>
                 </Table>
             </Card>
-
-
-
         )
     }
 }

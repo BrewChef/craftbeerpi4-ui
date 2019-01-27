@@ -1,5 +1,5 @@
-import {push} from "react-router-redux";
 import {rest_api} from './rest_helper'
+
 const KEY = "PLUGINS"
 const base_path = "/system"
 const initial_state = () => {

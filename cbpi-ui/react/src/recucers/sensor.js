@@ -1,6 +1,7 @@
-import {goBack, push, replace} from "react-router-redux";
+import {goBack, replace} from "react-router-redux";
 import _ from "lodash";
 import {rest_api} from "./rest_helper";
+
 const KEY = "SENSOR"
 const base_path = "/sensor"
 
@@ -26,7 +27,7 @@ export const add = (data) => rest_api(base_path + "/", KEY + "_ADD", "post", {},
 export const load = () => rest_api(base_path + "/", KEY + "_LOAD", "get");
 export const save = (id, data) => rest_api(base_path + "/" + id, KEY + "_SAVE", "put", {}, {...data});
 export const remove = (id) => rest_api(base_path + "/" + id, KEY + "_REMOVE", "delete", {id}, undefined, undefined, (dispatch) => dispatch(goBack()));
-export const call_action = (id, action) => rest_api(base_path+"/"+id+"/action/"+action , KEY+"_CALL_ACTION", "post");
+export const call_action = (id, action) => rest_api(base_path+"/"+id+"/action" , KEY+"_CALL_ACTION", "post", {}, {action});
 
 
 const sensor = (state = initial_state(), action) => {

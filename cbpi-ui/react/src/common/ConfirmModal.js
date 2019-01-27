@@ -1,28 +1,11 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate, Translate} from "react-localize-redux";
+import {Translate} from "react-localize-redux";
 import {connect} from "react-redux";
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import PropTypes from 'prop-types';
-import classNames from "classnames";
 
-
-@connect((state, ownProps) => {
-    return {
-
-
-    }
-}, (dispatch, ownProps) => {
-    return {
-        add: (id, data) => {
-            dispatch(add(id, data))
-        },
-        add_dashboard(name) {
-            dispatch(add_dashboard(name))
-        }
-    }
-}, null, {withRef: true})
+@connect((state, ownProps) => ({}), () => ({}), null, {withRef: true})
 export default class ConfirmModal extends Component {
-
 
     static propTypes = {
         title: PropTypes.string,
@@ -31,13 +14,10 @@ export default class ConfirmModal extends Component {
         confirm: PropTypes.func
     }
 
-
     state = {modal: false}
 
     toggle() {
-        this.setState({
-            modal: !this.state.modal
-        });
+        this.setState({modal: !this.state.modal});
     }
 
     cancel(e) {

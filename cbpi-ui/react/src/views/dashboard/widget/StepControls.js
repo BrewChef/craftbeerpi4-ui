@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, ListGroup, ListGroupItem} from "reactstrap";
+import {Button} from "reactstrap";
 import {goBack, push} from "react-router-redux";
-import {start, reset_all, reset_current} from "../../../recucers/brewing";
+import {reset_all, reset_current, start} from "../../../recucers/brewing";
 import {bindActionCreators} from "redux";
 import ConfirmModal from "../../../common/ConfirmModal";
 

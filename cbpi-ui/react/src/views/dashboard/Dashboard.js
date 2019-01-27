@@ -1,17 +1,16 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button} from "reactstrap";
 import "./Dashboard.css";
 import DragDummy from "./DragDummy";
-import {add, load_content, move, remove, remove_dashboard, toggle_edit, scroll} from "../../recucers/dashboard";
+import {add, load_content, move, remove, remove_dashboard, scroll, toggle_edit} from "../../recucers/dashboard";
 import windowSize from "react-window-size";
 import EditDashboardModal from "./EditDashboardModal";
 import ConfirmModal from "../../common/ConfirmModal";
 import WidgetSelectorModal from "./WidgetSelectorModal";
 import {config} from "./widget";
 import throttle from 'lodash.throttle';
-import {goBack, push} from "react-router-redux";
+import {push} from "react-router-redux";
 
 @connect((state, ownProps) => {
     return {
@@ -74,8 +73,8 @@ export default class Dashboard extends Component {
 
 
     handleScroll() {
-        this.props.scroll(this.props.match.params.id)
-        console.log("HALLO")
+        //this.props.scroll(this.props.match.params.id)
+
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -135,22 +134,22 @@ export default class Dashboard extends Component {
                     </div>
                 </div>
                 <div style={{position: "fixed", display: 'flex', flexDirection: 'column', overflowY: "scroll", bottom: 20, right: 20, overflow: "scroll"}}>
-                    {this.props.edit ? (<Button onClick={() => {
+                    {this.props.edit ? (<Button color="warning" size="sm" onClick={() => {
                         this.refs.edit_modal.wrappedInstance.show(this.props.dashboard.name)
                     }}><i className="fa fa-cogs"/> </Button>) : null }
                     <EditDashboardModal dbid={this.props.dbid} ref="edit_modal"/>
-                    {this.props.edit ? (<Button onClick={() => {
+                    {this.props.edit ? (<Button color="danger" size="sm" onClick={() => {
                         this.refs.delete_confirm.wrappedInstance.toggle()
                     }}><i className="fa fa-trash"/> </Button>) : null }
                     <ConfirmModal ref="delete_confirm" title="DELETE DASHBOARD" message="ARE_YOU_SURE" confirm={() => {
                         this.props.remove_dashboard(this.props.dbid)
                     }} cancel={() => {
                     }}/>
-                    {this.props.edit ? (<Button onClick={() => {
+                    {this.props.edit ? (<Button color="success" size="sm" onClick={() => {
                         this.refs.widget_modal.wrappedInstance.toggle()
                     }}><i className="fa fa-plus"/> </Button>) : null }
                     <WidgetSelectorModal ref="widget_modal" dbid={this.props.dbid}/>
-                    <Button onClick={this.props.toggle_edit}><i className="fa fa-edit"/> </Button>
+                    <Button size="sm" onClick={this.props.toggle_edit}><i className="fa fa-edit"/> </Button>
                 </div>
             </div>)
 

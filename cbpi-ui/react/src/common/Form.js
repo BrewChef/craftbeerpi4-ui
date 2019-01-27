@@ -1,7 +1,5 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate} from "react-localize-redux";
-import {connect} from "react-redux";
-import {Alert, Button, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
+import {Col, FormGroup, Input, Label, Row} from "reactstrap";
 import PropTypes from "prop-types";
 
 const Field = ({name, value, onChange, label}) => <FormGroup >

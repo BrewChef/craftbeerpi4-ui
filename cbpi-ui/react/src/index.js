@@ -1,21 +1,19 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 
-
 import AlertBox from "./common/AlertBox";
 import registerServiceWorker from "./registerServiceWorker";
 import {applyMiddleware, createStore} from "redux";
 import {Provider} from "react-redux";
 import createHistory from "history/createHashHistory";
 import {Redirect, Route, Switch} from "react-router-dom";
-import {Alert, Button, Container, Table} from "reactstrap";
-import {ConnectedRouter, push, routerMiddleware} from "react-router-redux";
+import {ConnectedRouter, routerMiddleware} from "react-router-redux";
 import logger from "redux-logger";
 import app from "./recucers";
 import "./css/fontawesome-all.min.css";
 import Navigation from "./Navigation";
 import {init as websocketInit} from "./websocket";
-import {addTranslation, addTranslationForLanguage, initialize, setActiveLanguage} from "react-localize-redux";
+import {addTranslationForLanguage, initialize, setActiveLanguage} from "react-localize-redux";
 import thunk from "redux-thunk";
 import KettleForm from "./views/hardware/KettleForm";
 import ActorForm from "./views/hardware/ActorForm";
@@ -32,10 +30,11 @@ import BrewingSteps from './views/steps/Steps'
 import StepForm from './views/steps/StepForm'
 import RecipeBook from './views/recipe_book'
 import Chart from './views/chart'
-import Splash from "./splash";
+import Splash from "./views/splash";
 import {load} from "./recucers/system";
-const history = createHistory()
 import {add_missing_key} from './recucers/translation'
+
+const history = createHistory()
 const middleware = routerMiddleware(history)
 
 const customMiddleWare = store => next => action => {

@@ -1,22 +1,18 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, FormGroup, Input, Label, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import {update_dashboard} from "../../recucers/dashboard";
-import {goBack, push} from "react-router-redux";
 
-@connect((state, ownProps) => {
+@connect((state, ownProps) => ({
 
-    return {
         dashboard: state.dashboard.dashboards[ownProps.dbid]
-    }
-}, (dispatch, ownProps) => {
+
+}), (dispatch, ownProps) => {
     return {
         add: (id, data) => {
             dispatch(add(id, data))
         },
         update_dashboard(data) {
-
             dispatch(update_dashboard(ownProps.dbid, data))
         }
     }

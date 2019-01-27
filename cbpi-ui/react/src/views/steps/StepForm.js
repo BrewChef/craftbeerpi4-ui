@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import {getActiveLanguage, getTranslate} from "react-localize-redux";
 import {connect} from "react-redux";
-import {Button, Jumbotron, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button} from "reactstrap";
 import BasicForm from "../../common/Form";
-import {push, goBack} from "react-router-redux";
-import {save, add, remove} from "../../recucers/brewing";
+import {goBack, push} from "react-router-redux";
+import {add, remove, save} from "../../recucers/brewing";
 import {bindActionCreators} from "redux";
 import ConfirmModal from '../../common/ConfirmModal';
 

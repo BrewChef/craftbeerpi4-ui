@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {getActiveLanguage, getTranslate} from "react-localize-redux";
+import {getActiveLanguage, getTranslate, Translate} from "react-localize-redux";
 import {connect} from "react-redux";
 import {Alert, Button} from "reactstrap";
 import {bindActionCreators} from "redux";
@@ -38,8 +38,8 @@ export class AlertWrapper extends React.Component {
 
     render() {
 
-        let {color, id, title, actions, message, timeout} = this.props.alert
-
+        let {color, id, title, actions, text, timeout} = this.props.alert
+        console.log(this.props)
         let props = {}
         if (!timeout || timeout <= 0) {
             props["toggle"] = () => {
@@ -55,8 +55,8 @@ export class AlertWrapper extends React.Component {
         });
 
         return (<Alert color={color} {...props} transition={{in: true, timeout: 200}}>
-            <h4 className="alert-heading"><i className={icon}/> {title}</h4>
-            <p>{message}</p>
+            <h4 className="alert-heading"><i className={icon}/> <Translate id={title}/></h4>
+            {text ? (<p>{text}</p>) : undefined}
             {this.render_buttons()}
         </Alert>)
     }
@@ -71,7 +71,6 @@ export class AlertWrapper extends React.Component {
     }, (dispatch, ownProps) => {
         return {
             actions: bindActionCreators({push, goBack, dismiss, response}, dispatch)
-
         }
     }
     , null, {withRef: true})
