@@ -23,7 +23,7 @@ const mapStateToProps = (state, ownProps) => {
         cols: [
             {label: "Name", name: "name"},
             {label: "Type", name: "type"},
-            {label: "State", name: "state", render: (row_value) => row_value.value}
+            {label: "State", name: "state", render: (row_value) => [row_value.value, row_value.unit]}
 
 
         ],

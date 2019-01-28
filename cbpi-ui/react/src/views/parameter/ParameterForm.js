@@ -18,7 +18,7 @@ const SelectField = ({name, value, onChange, label, options}) => <FormGroup >
 
     <Input value={value} onChange={(e) => {
         onChange(name, e)
-    }} type="select" name={name} id="exampleEmail">
+    }} type="select" name={name} id="option">
         {_.map(options, (v, key) => <option key={key} value={v.value}>{v.label}</option>)}
 
 
@@ -36,6 +36,7 @@ const HardwareField = ({name, value, onChange, label, options}) => <FormGroup >
 
     </Input>
 </FormGroup>
+
 
 @connect((state, ownProps) => ({
         parameter: state[reducer_name].list[ownProps.match.params.name] || {},
@@ -71,6 +72,7 @@ export default class ParameterForm extends Component {
             case "tank":
                 return <HardwareField options={tank} value={this.state.value} onChange={this.onChange.bind(this)}/>
             case "select":
+                console.log(parameter.options, this.state.value)
                 return <SelectField options={parameter.options} value={this.state.value} onChange={this.onChange.bind(this)}/>
             default:
                 return <Field value={this.state.value} onChange={this.onChange.bind(this)}/>

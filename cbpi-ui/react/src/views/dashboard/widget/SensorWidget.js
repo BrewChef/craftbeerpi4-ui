@@ -63,7 +63,7 @@ export default class SensorWidget extends Component {
 
                     <div style={{marginLeft: 10}}>
                         <div>
-                            {data.value}°C
+                            {data.value}{data.unit}
                         </div>
                         <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: "space-between"}}>
 

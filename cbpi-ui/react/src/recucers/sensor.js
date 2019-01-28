@@ -1,34 +1,54 @@
 import {goBack, replace} from "react-router-redux";
 import _ from "lodash";
-import {rest_api} from "./rest_helper";
+import {rest_api, RESTApi} from "./rest_helper";
 
 const KEY = "SENSOR"
 const base_path = "/sensor"
 
-const initial_state = () => {
+const initial_state = () => ({list: {}, types: {}})
 
-    let result = {
-        list: {},
-        types: {
-            t1: {label: "T1", parameter: {name: {label: "Name", type: "text"}}},
-            t2: {
-                label: "T2", parameter: {
-                    www: {label: "WWW", type: "text"}
-                }
-            }
-        }
+const api = new RESTApi(base_path, KEY)
 
-    }
+//export const add = (data) => rest_api(base_path + "/", KEY + "_ADD", "post", {}, {...data}, undefined, undefined, (dispatch, getState, request, response) => dispatch(replace("sensor/" + response.data.id)));
+//export const load = () => rest_api(base_path + "/", KEY + "_LOAD", "get");
+//export const save = (id, data) => rest_api(base_path + "/" + id, KEY + "_SAVE", "put", {}, {...data});
+//export const remove = (id) => rest_api(base_path + "/" + id, KEY + "_REMOVE", "delete", {id}, undefined, undefined, (dispatch) => dispatch(goBack()));
+//export const call_action = (id, action) => rest_api(base_path+"/"+id+"/action" , KEY+"_CALL_ACTION", "post", {}, {action});
 
-    return result
-}
 
-export const add = (data) => rest_api(base_path + "/", KEY + "_ADD", "post", {}, {...data}, undefined, undefined, (dispatch, getState, request, response) => dispatch(replace("sensor/" + response.data.id)));
-export const load = () => rest_api(base_path + "/", KEY + "_LOAD", "get");
-export const save = (id, data) => rest_api(base_path + "/" + id, KEY + "_SAVE", "put", {}, {...data});
-export const remove = (id) => rest_api(base_path + "/" + id, KEY + "_REMOVE", "delete", {id}, undefined, undefined, (dispatch) => dispatch(goBack()));
-export const call_action = (id, action) => rest_api(base_path+"/"+id+"/action" , KEY+"_CALL_ACTION", "post", {}, {action});
+export const add = (data) => api.post({
+    url: "/",
+    action: "ADD",
+    data,
+    post_response: (dispatch,getState,request, response) => dispatch(replace("actor/"+response.data.id))
 
+})
+
+export const load = (data) => api.get({
+    url: "/",
+    action: "LOAD",
+})
+
+export const save = (id, data) => api.put({
+    url: "/"+id ,
+    action: "SAVE",
+    data,
+})
+
+export const remove = (id) => api.delete({
+    url: "/"+id,
+    action: "REMOVE",
+    context: {id},
+    pre_response: (dispatch)=>dispatch(goBack())
+})
+
+
+export const call_action = (id, action) => api.post({
+    url: "/"+id+"/action",
+    success_msg: undefined,
+    data: {name:action, parameter:{}},
+    action: "ACTION"
+})
 
 const sensor = (state = initial_state(), action) => {
     switch (action.type) {

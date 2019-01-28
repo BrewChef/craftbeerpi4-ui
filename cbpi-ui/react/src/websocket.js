@@ -1,24 +1,47 @@
-import {add as show_alert} from "./recucers/alert";
+import {alert} from "./recucers/alert";
 
 class CBPiWebSocket {
   constructor() {
       this.ws = undefined
+      this.connect_count = 0
   }
 
   connection_lost(e) {
         this.store.dispatch({type:"WS_CONNECTION_LOST"});
         console.log("##### ALERT LOST")
-        this.store.dispatch(show_alert("Connection lost", "Offline", "danger"))
+        this.store.dispatch(alert(
+            {
+            text: "No Connection the Server",
+            title: "Connection Lost",
+            color: "danger",
+            timeout: undefined,
+            id: "connection_lost",
+            }
+        ))
         setTimeout( () => {this.open()}, 5000)
   }
 
   open() {
       this.ws = new WebSocket('ws://' + document.domain + ':' + location.port + '/ws1', []);
-
       this.ws.onclose = this.connection_lost.bind(this)
-
       this.ws.onmessage = this.on_message.bind(this)
+      this.ws.onopen = this.on_open.bind(this)
+  }
 
+  on_open() {
+      if (this.connect_count > 0) {
+
+          this.store.dispatch(alert(
+            {
+            text: "Reconnected",
+            title: "Connection to server reestablished",
+            color: "success",
+            timeout: undefined,
+            id: "connection",
+            }
+        ))
+      }
+      this.connect_count++
   }
 
   on_message(e) {
